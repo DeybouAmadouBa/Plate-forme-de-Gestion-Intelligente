@@ -1,0 +1,22 @@
+<?php
+require 'db.php';
+require 'auth.php';
+checkRole('prof');
+
+$id = $_GET['id'];
+
+if(isset($_POST['submit'])){
+    $note = $_POST['note'];
+    $comment = $_POST['comment'];
+
+    $conn->query("UPDATE soumissions 
+                  SET note='$note', commentaire='$comment'
+                  WHERE id=$id");
+}
+?>
+
+<form method="POST">
+    <input type="number" name="note" placeholder="Note"><br>
+    <textarea name="comment"></textarea><br>
+    <button name="submit">Corriger</button>
+</form>
