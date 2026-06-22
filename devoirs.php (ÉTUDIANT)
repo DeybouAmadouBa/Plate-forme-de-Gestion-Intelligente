@@ -1,0 +1,15 @@
+<?php
+require 'db.php';
+?>
+
+<h2>Devoirs</h2>
+
+<?php
+$result = $conn->query("SELECT * FROM devoirs");
+
+while($row = $result->fetch_assoc()){
+    echo "<h3>".$row['titre']." (".$row['type'].")</h3>";
+    echo "<p>".$row['description']."</p>";
+    echo "<a href='soumission.php?id=".$row['id']."'>Envoyer</a><hr>";
+}
+?>
