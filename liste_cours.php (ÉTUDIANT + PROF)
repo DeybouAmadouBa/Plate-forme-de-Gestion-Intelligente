@@ -1,0 +1,15 @@
+<?php
+require 'db.php';
+?>
+
+<h2>Liste des cours</h2>
+
+<?php
+$result = $conn->query("SELECT * FROM cours");
+
+while($row = $result->fetch_assoc()){
+    echo "<h3>".$row['titre']."</h3>";
+    echo "<p>".$row['description']."</p>";
+    echo "<a href='uploads/".$row['fichier']."' target='_blank'>Voir cours</a><hr>";
+}
+?>
