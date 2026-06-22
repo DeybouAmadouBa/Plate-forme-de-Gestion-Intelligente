@@ -1,0 +1,27 @@
+<?php
+require 'db.php';
+require 'auth.php';
+checkRole('prof');
+
+if(isset($_POST['submit'])){
+    $titre = $_POST['titre'];
+    $desc = $_POST['description'];
+    $prof_id = $_SESSION['user_id'];
+
+    $file = $_FILES['fichier']['name'];
+    move_uploaded_file($_FILES['fichier']['tmp_name'], "uploads/".$file);
+
+    $sql = "INSERT INTO cours(titre, description, professeur_id, fichier)
+            VALUES('$titre','$desc','$prof_id','$file')";
+    $conn->query($sql);
+
+    echo "Cours ajouté";
+}
+?>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="text" name="titre" placeholder="Titre"><br>
+    <textarea name="description"></textarea><br>
+    <input type="file" name="fichier"><br>
+    <button name="submit">Ajouter</button>
+</form>
